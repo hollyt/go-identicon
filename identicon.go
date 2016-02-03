@@ -1,23 +1,27 @@
 package main
 
 import (
-    "crypto/sha1"
+    "crypto/md5"
     "flag"
     "fmt"
 )
 
+// Hashed string
 var hashString string
 func init() {
-    flag.StringVar(&hashString, "hashs", "Hello", "String to hash")
+    flag.StringVar(&hashString, "hs", "Hello", "String to hash")
 }
 
 func main() {
 
+    // Get string to hash
     flag.Parse()
 
-    hashed := sha1.New()
+    hashed := md5.New()
     hashed.Write([]byte(hashString))
     byteString := hashed.Sum(nil)
+
     fmt.Println("The string to hash: ", hashString)
-    fmt.Printf("Hashed: %x\n", byteString)
+    fmt.Printf("Hash in hex: %x\n", byteString)
+    fmt.Println("Hash in bytes: ", byteString)
 }
