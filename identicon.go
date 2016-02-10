@@ -32,7 +32,8 @@ func New(hashedBytes []byte) *identicon {
 
 func (id *identicon) createIdenticon() {
     background := color.RGBA{255, 255, 255, 255}
-    r, g, b := id.hashedBytes[0:2]
+    colors := id.hashedBytes[0:3]
+    r, g, b := colors[0], colors[1], colors[2]
     pixelColor := color.RGBA{r, g, b, 1}
 }
 
@@ -45,6 +46,11 @@ func main() {
     hashed.Write([]byte(hashString))
     hashedBytes := hashed.Sum(nil)
 
+    id := New(hashedBytes)
+    id.createIdenticon()
+
+    // Testing
+    fmt.Println("id: ", id)
     fmt.Println("The string to hash: ", hashString)
     fmt.Printf("Hash in hex: %x\n", hashedBytes)
     fmt.Println("Hash in bytes: ", hashedBytes)
