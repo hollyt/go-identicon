@@ -41,7 +41,12 @@ func (id *identicon) createIdenticon() {
 	pixelColor := color.RGBA{r, g, b, 1}
 
 	img := image.NewPaletted(image.Rect(0, 0, 1000, 1000), color.Palette{background, pixelColor})
-
+	for i := 100; i < 1000; i += 1 {
+		img.Pix[i] = r
+		img.Pix[i+1] = g
+		img.Pix[i+2] = b
+		img.Pix[i+3] = 1
+	}
 	outputFile, err := os.Create("test.png")
 	if err != nil {
 		fmt.Println("Error creating .png")
